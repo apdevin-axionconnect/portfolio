@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dev Quest // Portfolio</title>
+<meta name="description" content="A developer's journey from first year to graduation, played as a side-scrolling platformer.">
+<meta name="theme-color" content="#ffc107">
+<meta property="og:title" content="Dev Quest // Portfolio">
+<meta property="og:description" content="A developer's journey from first year to graduation, played as a side-scrolling platformer.">
+<meta property="og:image" content="og.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+</head>
+<body data-state="title">
+<canvas id="game" aria-hidden="true"></canvas>
+<noscript><div class="panel" style="margin:40px auto;max-width:600px;padding:24px">This portfolio is a small game and needs JavaScript. The same content is in the <a href="resume.pdf">resume PDF</a>.</div></noscript>
+
+<!-- plain-text version of the whole run: screen readers, recruiters in a hurry, search engines, and the printable resume -->
+<nav id="overview" class="panel" hidden tabindex="-1" aria-label="Run log">
+  <div class="ov-head">
+    <h2>Run log</h2>
+    <div class="tabs" role="tablist">
+      <button class="tab on" role="tab" data-tab="story" aria-selected="true">Story</button>
+      <button class="tab" role="tab" data-tab="skills" aria-selected="false">Skill tree</button>
+      <button class="tab" role="tab" data-tab="about" aria-selected="false">Why this portfolio</button>
+    </div>
+    <button class="btn" id="printLog">Download PDF</button>
+  </div>
+  <p class="hint">Use ↑ ↓ to move between cards and Enter to open one.</p>
+  <div class="tabpanel" data-tab="story" id="overviewBody"></div>
+  <div class="tabpanel" data-tab="skills" hidden><ul id="skillTree" class="skills"></ul></div>
+  <div class="tabpanel about" data-tab="about" id="aboutBody" hidden></div>
+  <button class="btn primary" id="closeOverview">Back to game</button>
+</nav>
+
+<div id="start" role="dialog" aria-label="Start screen">
+  <div class="panel title-box">
+    <img id="heroPreview" alt="" width="66" height="92">
+    <h1>Dev Quest</h1>
+    <p class="name" id="playerName"></p>
+    <p class="sub" id="tagline"></p>
+    <div id="skins" role="group" aria-label="Choose your hero"></div>
+    <div class="row">
+      <button id="startBtn" class="btn primary big">▶ New game</button>
+      <button id="continueBtn" class="btn big" hidden>Continue</button>
+      <button id="skipBtn" class="btn big">Read as text</button>
+    </div>
+    <p id="best" class="best"></p>
+    <p class="hint"><kbd>→</kbd> / <kbd>D</kbd> or scroll to run · <kbd>Space</kbd> jump · hit <b>?</b> blocks · stomp critters · <kbd>Enter</kbd> details · <kbd>Esc</kbd> run log · gamepad works</p>
+    <a id="repoLink" class="repo" href="#" target="_blank" rel="noopener">View the source on GitHub ↗</a>
+  </div>
+</div>
+
+<header id="hud" aria-live="polite">
+  <div class="chip">
+    <img id="hudAvatar" alt="" width="28" height="39">
+    <div><strong id="hudLevel">World 1</strong><span id="hudYear">Press start</span></div>
+  </div>
+  <div id="hearts" class="hearts" role="group" aria-label="Hearts"></div>
+  <div id="progress" role="group" aria-label="Timeline"><div id="progressFill"></div></div>
+  <div class="chip"><img id="hudCoinIcon" alt="" width="28" height="28"><strong><span id="hudCoins">0</span>/<span id="hudTotal">0</span></strong></div>
+  <div class="chip"><img id="hudCoinGold" alt="" width="26" height="26"><strong id="hudScore">0</strong></div>
+  <div class="chip time"><strong id="hudTime">0:00</strong></div>
+  <button id="autoBtn" class="btn icon" aria-label="Auto-run walkthrough" aria-pressed="false" title="Auto-run">⏩</button>
+  <button id="logBtn" class="btn icon" aria-label="Open run log" title="Run log">☰</button>
+  <button id="muteBtn" class="btn icon" aria-label="Toggle music" aria-pressed="false" title="Music">♪</button>
+</header>
+
+<div id="banner"></div>
+<div id="toast" role="status"></div>
+<div id="card" class="panel" role="button" tabindex="0" aria-label="Open details">
+  <img class="icon" alt="" width="56" height="56">
+  <div class="body"><span class="kind"></span><h3></h3><p id="typed"></p><div id="cardExtra"></div><button class="more" id="cardMore" hidden>Details ↵</button></div>
+</div>
+
+<div id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="panel modal-box" tabindex="-1">
+    <button class="btn icon close" id="modalClose" aria-label="Close">✕</button>
+    <img id="modalIcon" alt="" width="64" height="64">
+    <span class="kind" id="modalKind"></span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+    <div id="modalStory" class="story"></div>
+    <img id="modalImage" alt="Screenshot" hidden>
+    <div id="modalLevel"></div>
+    <div id="modalTech" class="tags"></div>
+    <div id="modalLinks" class="links"></div>
+  </div>
+</div>
+
+<div id="pad" aria-hidden="true">
+  <button class="btn pad" data-k="ArrowLeft">◀</button><button class="btn pad" data-k="ArrowRight">▶</button><button class="btn pad primary" data-k=" ">▲</button>
+</div>
+<div id="rotate" aria-hidden="true"><div class="panel">↻ Rotate your phone to landscape for the best run</div></div>
+<pre id="debug" hidden aria-hidden="true"></pre>
+<div id="crash" class="panel" hidden role="alert">The castle is under maintenance. Something broke in the game, but the <button class="btn" onclick="document.getElementById('overview').hidden=false">text version</button> still works.</div>
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

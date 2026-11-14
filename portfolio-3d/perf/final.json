@@ -1,0 +1,15 @@
+{
+  "dist_total_kb": 5680,
+  "dom_content_loaded_ms": 1658,
+  "os_screen_visible_ms": 6399,
+  "room_ready_ms": 26930,
+  "room_model_loaded_ms": 3309,
+  "first_paint_ms": 3016,
+  "cold_load_requests": 21,
+  "cold_load_transfer_kb": 3199,
+  "network_idle_ms": 15227,
+  "gpu_draw_calls_per_sec_room_idle": 0,
+  "gpu_draw_calls_per_sec_desk_idle": 44,
+  "os_open_app_ms_median": 259,
+  "os_open_app_ms_worst": 415
+}

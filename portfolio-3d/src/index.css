@@ -1,0 +1,31 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #0b0d14; font-family: system-ui, Segoe UI, sans-serif; }
+.hint { z-index: 2; position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: #cbd5e1; font-size: 14px; background: rgba(8,9,13,.78); padding: 6px 8px 6px 14px; border-radius: 12px; display: flex; align-items: center; gap: 6px; white-space: nowrap; } /* no backdrop blur: it would re-blur the canvas on every frame */
+.hint button { background: rgba(255,255,255,.12); color: #fff; border: 0; padding: 6px 12px; border-radius: 8px; cursor: pointer; font: inherit; }
+.hint button:hover, .hint button:focus-visible { background: rgba(255,255,255,.24); }
+@media (max-width: 560px) { .hint span { display: none; } }
+/* whiteboard toolbar (anchored under the board by Whiteboard.jsx) */
+.board-tools { pointer-events: auto; display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 12px; background: rgba(20,22,28,.92); white-space: nowrap; font-size: 13px; }
+.board-tools button { background: rgba(255,255,255,.1); color: #fff; border: 0; height: 30px; min-width: 30px; padding: 0 10px; border-radius: 8px; cursor: pointer; font: inherit; }
+.board-tools button.on { background: #fff; color: #111; }
+.board-tools .swatch { width: 30px; padding: 0; border-radius: 50%; border: 2px solid rgba(255,255,255,.35); }
+.board-tools .swatch.on { border-color: #fff; box-shadow: 0 0 0 2px #fff; }
+.board-tools .sep { width: 1px; height: 20px; background: rgba(255,255,255,.2); margin: 0 2px; }
+.back { z-index: 2; position: fixed; top: 16px; left: 16px; background: #1f2937; color: #fff; border: 0; padding: 8px 14px; border-radius: 8px; cursor: pointer; }
+
+/* The monitor screen: the macOS portfolio in an iframe (see Monitor.jsx). */
+.screen { display: block; width: 1280px; height: 800px; border: 0; background: #000; }
+
+/* light tier: vignette as plain CSS instead of a post-processing pass */
+.vignette { position: fixed; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.5) 100%); }
+
+/* The monitor and phone screens are DOM layers moved by a 3D transform every frame. will-change keeps them as cached
+   textures instead of being re-rasterised whenever the camera moves. */
+.portal > div, .portal > div > div, .portal > div > div > div { will-change: transform; }
+
+/* whiteboard drawing overlay (the real <canvas>, laid over the board while you are at it) */
+.board-surface { position: relative; cursor: crosshair; touch-action: none; }
+.board-surface.erasing { cursor: cell; }
+.board-canvas { display: block; }
+/* same tint the 3D board material applies (colour x 0.79), without a per-frame CSS filter */
+.board-surface::after { content: ""; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.21); pointer-events: none; }

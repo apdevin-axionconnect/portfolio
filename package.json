@@ -1,0 +1,19 @@
+{
+  "name": "portfolio-workspace",
+  "private": true,
+  "description": "3D room (portfolio-3d) > macOS desktop (macos-portfolio) > Dev Quest game (pixel-quest-portfolio). Deploy portfolio-3d/dist.",
+  "scripts": {
+    "install:all": "npm ci --prefix pixel-quest-portfolio && npm ci --prefix macos-portfolio && npm ci --prefix portfolio-3d",
+    "lint": "npm run lint --prefix macos-portfolio && npm run lint --prefix portfolio-3d && npm run typecheck --prefix pixel-quest-portfolio",
+    "test": "npm test --prefix pixel-quest-portfolio && npm test --prefix macos-portfolio",
+    "build": "npm run build --prefix portfolio-3d",
+    "smoke": "npm run smoke --prefix portfolio-3d",
+    "check": "npm run lint && npm test && npm run build && npm run smoke && npm run e2e",
+    "e2e": "npm run e2e --prefix portfolio-3d",
+    "validate": "npm run validate --prefix macos-portfolio",
+    "check:launch": "npm run validate && npm run check"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}

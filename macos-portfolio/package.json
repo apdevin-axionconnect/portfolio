@@ -1,0 +1,26 @@
+{
+  "name": "macos-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build:game": "npm --prefix ../pixel-quest-portfolio run build -- --outDir=../macos-portfolio/public/game --emptyOutDir",
+    "predev": "npm run build:game",
+    "prebuild": "npm run build:game",
+    "lint": "oxlint src",
+    "test": "node --test test/",
+    "validate": "node scripts/validate-content.mjs",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "oxlint": "^1.93.0",
+    "vite": "^5.4.11"
+  }
+}

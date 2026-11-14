@@ -1,0 +1,14 @@
+{
+  "dist_total_kb": 15031,
+  "dom_content_loaded_ms": 3093,
+  "os_screen_visible_ms": 8040,
+  "room_model_loaded_ms": 13529,
+  "first_paint_ms": 3336,
+  "cold_load_requests": 20,
+  "cold_load_transfer_kb": 9820,
+  "network_idle_ms": 14171,
+  "fps_room_view": 0.3,
+  "fps_at_desk": 0.3,
+  "os_open_app_ms_median": 2076,
+  "os_open_app_ms_worst": 6530
+}

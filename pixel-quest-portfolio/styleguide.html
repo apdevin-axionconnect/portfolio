@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev Quest · Style guide</title>
+<script type="module">
+  import '@fontsource/fredoka/500.css'; import '@fontsource/fredoka/700.css'; import '@fontsource/nunito/600.css'; import '@fontsource/nunito/800.css';
+  import './src/tokens.css'; import './src/style.css';
+  document.getElementById('theme').onclick = () => { const h = document.documentElement; h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark'; };
+  const sw = document.getElementById('swatches');
+  for (const v of ['ink','muted','paper-solid','surface','gold','gold2','blue','blue-ink','danger','ok','sky']) sw.insertAdjacentHTML('beforeend', `<div class="sw"><i style="background:var(--${v})"></i><code>--${v}</code></div>`);
+</script>
+<style>
+  html,body{overflow:auto!important;background:var(--surface)!important}
+  main{max-width:960px;margin:0 auto;padding:40px 24px;display:grid;gap:32px}
+  section{background:var(--paper-solid);border-radius:var(--r-lg);padding:24px;box-shadow:var(--shadow)}
+  h1{font-family:var(--font-display);font-size:var(--fs-2xl)} h2{font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:12px}
+  .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  #swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}
+  .sw i{display:block;height:48px;border-radius:var(--r-md);border:1px solid var(--line)} .sw code{font-size:12px}
+  .type p{margin:6px 0}
+  .static{position:static!important;opacity:1!important;transform:none!important;margin:0!important;pointer-events:auto!important;width:auto!important;display:flex!important}
+</style>
+</head>
+<body>
+<main>
+  <h1>Dev Quest · Style guide <button class="btn" id="theme" style="float:right">Toggle dark</button></h1>
+  <section><h2>Colour tokens</h2><div id="swatches"></div></section>
+  <section class="type"><h2>Type scale</h2>
+    <p style="font:700 var(--fs-hero)/1 var(--font-display)">Hero · Fredoka 700</p>
+    <p style="font:600 var(--fs-2xl) var(--font-display)">Heading 2xl · Fredoka 600</p>
+    <p style="font:600 var(--fs-xl) var(--font-display)">Heading xl</p>
+    <p style="font:800 var(--fs-lg) var(--font-body)">Body lg · Nunito 800</p>
+    <p style="font:600 var(--fs-md) var(--font-body)">Body md · Nunito 600</p>
+    <p style="font:700 var(--fs-sm) var(--font-body);color:var(--muted)">Caption sm · muted</p>
+  </section>
+  <section><h2>Buttons</h2><div class="row">
+    <button class="btn">Default</button><button class="btn primary">Primary</button><button class="btn big">Big</button><button class="btn primary big">▶ Primary big</button>
+    <button class="btn icon">☰</button><button class="btn icon on">⏩</button><button class="btn icon off">♪</button></div></section>
+  <section><h2>Chips, hearts, progress</h2><div class="row">
+    <div class="chip"><div><strong>World 2</strong><span>Craft · 2023</span></div></div>
+    <div class="chip"><strong>12/15</strong></div>
+    <div id="progress" style="width:300px"><div id="progressFill" style="width:45%"></div><button class="mark" style="left:10%"></button><button class="mark" style="left:40%"></button></div>
+    <span class="kind">Project</span><span class="tag">TypeScript</span></div></section>
+  <section><h2>Card</h2>
+    <div id="card" class="panel static"><img class="icon" alt="" width="56" height="56" src="src/assets/hd/gemBlue.png"><div class="body"><span class="kind">Skill</span><h3>Recursion finally clicked</h3><p>A recursive factorial blew the stack and I spent a night finding out what a stack frame is.</p></div></div></section>
+  <section><h2>Story blocks</h2><div class="story"><div><span>Why it mattered</span>First time I understood how the machine runs my code.</div><div><span>What I'd do differently</span>Draw the call tree before writing the function.</div></div>
+    <div class="bar" style="margin-top:12px"><span style="width:80%"></span></div></section>
+</main>
+</body>
+</html>

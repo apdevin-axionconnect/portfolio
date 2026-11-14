@@ -1,0 +1,27 @@
+/* Design tokens: the single source for colour, type, spacing, radius, elevation and motion.
+   Components use tokens only; raw values live here. The day-night cycle flips `data-theme` to dark. */
+:root{
+  /* colour */
+  --ink:#1d2b3a; --muted:#5d6f82; --paper:rgba(255,255,255,.92); --paper-solid:#fff; --surface:#f1f5f9; --line:rgba(29,43,58,.08);
+  --gold:#ffc107; --gold2:#ff9800; --gold-ink:#3a2600; --gold-shade:#c76f00; --gold-tint:#fff4d6;
+  --blue:#4aa3ff; --blue-ink:#1e5aa8; --blue-tint:#eef6ff; --danger:#e53935; --ok:#43a047;
+  --sky:#7ec8f2;
+  /* type */
+  --font-display:Fredoka,Nunito,sans-serif; --font-body:Nunito,system-ui,sans-serif;
+  --fs-xs:11px; --fs-sm:13px; --fs-md:15px; --fs-lg:18px; --fs-xl:22px; --fs-2xl:28px; --fs-hero:clamp(40px,8vw,64px);
+  /* spacing (4px grid) */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px; --s8:32px; --s10:40px;
+  /* radius */
+  --r-sm:6px; --r-md:14px; --r-lg:22px; --r-pill:999px;
+  /* elevation */
+  --shadow:0 12px 40px rgba(20,40,70,.18),0 2px 6px rgba(20,40,70,.08);
+  --shadow-btn:0 4px 0 rgba(29,43,58,.12),0 6px 16px rgba(20,40,70,.1);
+  --shadow-btn-pressed:0 1px 0 rgba(29,43,58,.12);
+  /* motion */
+  --t-fast:.1s; --t-med:.3s; --t-slow:.6s; --ease-out:cubic-bezier(.2,.8,.2,1);
+}
+:root[data-theme=dark]{
+  --ink:#eef3f8; --muted:#a9b7c6; --paper:rgba(24,32,48,.9); --paper-solid:#1a2434; --surface:#243043; --line:rgba(255,255,255,.1);
+  --gold-tint:#3b3012; --blue-tint:#1b2b44; --blue-ink:#8fc1ff; --sky:#1a2550;
+}
+@media (prefers-reduced-motion:reduce){:root{--t-fast:0s;--t-med:0s;--t-slow:0s}}

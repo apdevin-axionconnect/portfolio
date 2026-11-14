@@ -1,0 +1,7 @@
+# Netlify: connect the repo and deploy. Cache and security headers come from portfolio-3d/public/_headers.
+[build]
+  command = "npm run install:all && npm run build"
+  publish = "portfolio-3d/dist"
+
+[build.environment]
+  NODE_VERSION = "24" # the game's content validator runs a .ts file directly, which needs Node 24+
